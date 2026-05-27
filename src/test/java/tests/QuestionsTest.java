@@ -21,7 +21,7 @@ public class QuestionsTest {
         this.expectedText = expectedText;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Вопрос №{0}")
     public static Collection<Object[]> getQuestionsData() {
         return Arrays.asList(new Object[][] {
             {0, "Сутки — 400 рублей. Оплата курьеру — наличными или картой."},

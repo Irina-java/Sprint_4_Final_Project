@@ -39,7 +39,7 @@ public class OrderTest {
         this.comment = comment;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Заказ: кнопка={0}, имя={1}, фамилия={2}")
     public static Collection<Object[]>getOrderData() {
         return Arrays.asList(new Object[][] {
                 {true, "Ирина", "Иванова", "Москва, Ленина, 1", "Комсомольская", "+79997778844", "26.05.2026", "сутки", "чёрный жемчуг", "Позвонить за час"},
