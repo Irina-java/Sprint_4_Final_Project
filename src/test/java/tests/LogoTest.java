@@ -7,13 +7,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pageobject.MainPage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import org.junit.After;
 
 public class LogoTest {
-
+private WebDriver driver;
     @Test
     public void scooterLogoOpensMainPageTest() {
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         MainPage mainPage = new MainPage(driver);
 
         mainPage.openPage();
@@ -25,12 +26,12 @@ public class LogoTest {
 
         assertEquals(expectedUrl, actualUrl);
 
-        driver.quit();
     }
+
     @Test
     public void  yandexLogoOpensYandexInNewWindowTest() {
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         MainPage mainPage = new MainPage(driver);
 
         mainPage.openPage();
@@ -38,15 +39,15 @@ public class LogoTest {
         String mainWindow = driver.getWindowHandle();
 
         mainPage.clickYandexLogo();
-        for (String windowHandle : driver.getWindowHandles()) {
-            if (!windowHandle.equals(mainWindow)) {
-                driver.switchTo().window(windowHandle);
-                break;
-            }
-        }
-        String actualUrl = driver.getCurrentUrl();
-        assertTrue(actualUrl.contains("yandex.ru"));
 
-        driver.quit();
+        String yandexLogoLink = mainPage.getYandexLogoLink();
+
+        mainPage.clickYandexLogo();
+
+        assertTrue(yandexLogoLink.contains("yandex.ru"));
     }
+        @After
+        public void tearDown() {
+            driver.quit();
+        }
 }

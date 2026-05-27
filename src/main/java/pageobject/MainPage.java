@@ -75,6 +75,9 @@ public class MainPage {
     public void clickYandexLogo() {
         driver.findElement(yandexLogo).click();
     }
+    public String getYandexLogoLink() {
+        return driver.findElement(yandexLogo).getAttribute("href");
+    }
 
     // Несуществующий номер заказа
     public void clickOrderStatusButton() {
