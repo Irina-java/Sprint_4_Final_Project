@@ -11,10 +11,13 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
+import org.junit.After;
 
 @RunWith(Parameterized.class)
 
 public class OrderTest {
+    public WebDriver driver;
+
     private final boolean useTopButton;
     private final String name;
     private final String surname;
@@ -49,7 +52,7 @@ public class OrderTest {
     @Test
     public void createOrderTest() {
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
 
         MainPage mainPage = new MainPage(driver);
         OrderPage orderPage = new OrderPage(driver);
@@ -71,7 +74,9 @@ public class OrderTest {
         orderPage.clickYesButton();
 
         assertTrue(orderPage.isOrderSuccessMessageDisplayed());
-
+    }
+    @After
+    public void tearDown() {
         driver.quit();
     }
 }

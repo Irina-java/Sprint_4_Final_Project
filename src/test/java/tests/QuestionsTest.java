@@ -9,10 +9,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
+import org.junit.After;
 
 @RunWith(Parameterized.class)
 
 public class QuestionsTest {
+    private WebDriver driver;
     private final int questionIndex;
     private final String expectedText;
 
@@ -38,7 +40,7 @@ public class QuestionsTest {
     @Test
     public void openMainPageTest() {
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         MainPage mainPage = new MainPage(driver);
 
         mainPage.openPage();
@@ -47,6 +49,10 @@ public class QuestionsTest {
 
         String actualText = mainPage.getAnswerText(questionIndex);
         assertEquals(expectedText, actualText);
+
+    }
+    @After
+    public void tearDown()  {
         driver.quit();
     }
 

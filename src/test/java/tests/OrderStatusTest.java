@@ -6,12 +6,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pageobject.MainPage;
 import static org.junit.Assert.assertTrue;
+import org.junit.After;
 
 public class OrderStatusTest {
+    private WebDriver driver;
+
     @Test
     public void nonexistentOrderShowsNotFoundMessageTest() {
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         MainPage mainPage = new MainPage(driver);
 
         mainPage.openPage();
@@ -20,7 +23,9 @@ public class OrderStatusTest {
         mainPage.clickGoButton();
 
         assertTrue(mainPage.isOrderNotFoundMessageDisplayed());
-
+    }
+    @After
+    public void tearDown()  {
         driver.quit();
     }
 }
